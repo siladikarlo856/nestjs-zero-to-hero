@@ -57,6 +57,7 @@ export class TasksService {
   }
 
   deleteTask(id: string): void {
+    this.getTaskById(id); // for validation
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
