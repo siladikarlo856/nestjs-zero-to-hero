@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -33,15 +34,15 @@ export class TasksController {
     return this.tasksService.getTaskById(id);
   }
 
-  //   @Post()
-  //   createTask(@Body() createTaskDto: CreateTaskDto) {
-  //     return this.tasksService.createTask(createTaskDto);
-  //   }
+  @Post()
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto);
+  }
 
-  //   @Delete('/:id')
-  //   deleteTask(@Param('id') id: string): void {
-  //     return this.tasksService.deleteTask(id);
-  //   }
+  @Delete('/:id')
+  async deleteTask(@Param('id') id: string): Promise<void> {
+    await this.tasksService.deleteTask(id);
+  }
 
   //   @Patch('/:id/status')
   //   updateTaskStatus(
